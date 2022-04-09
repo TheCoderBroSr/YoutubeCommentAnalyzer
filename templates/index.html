@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Caveat">
+    <link rel="stylesheet" href="static/styles.css">
+    <title>Home</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Youtube Comment Analyzer</h1>
+
+        <form action="{{ url_for('processing') }}" class="input-form" method="POST" autocomplete="off">
+            <input type="text" placeholder="Enter youtube video's link" name="url" id="url" required>
+            <button type="submit" id="analyze">Analyze</button>
+        </form>
+        
+        <div class="status">
+            {% if error == 2%}
+                <h2 class="error">Video doesn't have comments</h2>
+            {% elif error == 1 %}
+                <h2 class="error">Invalid Url</h2>
+            {% elif error==0 %}
+                <h3>Comment with Emotion Prediction</h3>
+                {% for class, comment in comments %}
+                <h4 class="{{ class }}">{{ comment }}</h4>
+                {% endfor %}
+            {% else %}
+                <h3 class="blacked-out">//Status...</h3>
+            {% endif %}
+        </div>
+
+        {% if (video_response == 0 or video_response == 1) and (comments != []) %}
+        <div class="conclusion">
+            <h3>Summary</h3>
+            <h3 class="{{'success' if video_response==1 else 'error'}}">The video had {{"postive" if video_response==1 else "negative"}} feedback({{ emotion_perc }}%)</h3>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
