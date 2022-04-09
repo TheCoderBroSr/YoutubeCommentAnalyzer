@@ -1,11 +1,5 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "*.py",
-            "use": "@TheCoderBroSr/youtube-comment-analyzer"
-        }
-    ],
     "routes": [
         {
             "src": "(.*)",
