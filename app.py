@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, url_for, redirect
 from func import *
 
+note = 0
+if API_KEY[0] == "Y":
+    note = 1
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    note = 0
-    if API_KEY[0] == "Y":
-        note = 1
-
     return render_template('index.html', note=note)
 
 @app.route("/processing", methods=["POST"])
@@ -48,7 +48,7 @@ def processing():
         except TypeError:
             err = 2
 
-    return render_template('index.html', emotion_perc=positivity_perc, error=err, video_response=video_response, comments=comments)
+    return render_template('index.html', emotion_perc=positivity_perc, error=err, video_response=video_response, comments=comments, note=note)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
