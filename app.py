@@ -51,4 +51,4 @@ def processing():
     return render_template('index.html', emotion_perc=positivity_perc, error=err, video_response=video_response, comments=comments, note=note)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000)
