@@ -30,6 +30,9 @@
                 {% endfor %}
             {% else %}
                 <h3 class="blacked-out">//Status...</h3>
+                {% if note %}
+                    <h4><u>Note</u>: you have to provide your own api key 🙂</h4>
+                {% endif %}
             {% endif %}
         </div>
 

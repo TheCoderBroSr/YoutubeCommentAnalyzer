@@ -5,7 +5,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    note = 0
+    if API_KEY[0] == "Y":
+        note = 1
+
+    return render_template('index.html', note=note)
 
 @app.route("/processing", methods=["POST"])
 def processing():
