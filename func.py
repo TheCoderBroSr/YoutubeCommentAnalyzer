@@ -2,7 +2,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 import validators, re, pickle
 
-API_KEY = "MY KEY"
+API_KEY = "YOUR KEY"
 CLEANER = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
 
 def load_file(filename):
