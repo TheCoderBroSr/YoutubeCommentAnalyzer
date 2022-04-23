@@ -2,6 +2,15 @@ from flask import Flask, render_template, request, url_for, redirect
 from func import *
 
 note = 0
+print("Performing Initialisation...")
+
+#Loading model, cv
+model = load_file("data/trial_model.sav")
+cv = load_file("data/countvectorizer.sav")
+youtube = build_yt_api()
+
+print("Initialised !")
+
 if API_KEY[0] == "Y":
     note = 1
 
@@ -26,14 +35,14 @@ def processing():
         err = 0
     
     if err == 0:
-        #Loading model, cv
-        model = load_file("data/trial_model.sav")
-        cv = load_file("data/countvectorizer.sav")
+        # #Loading model, cv
+        # model = load_file("data/trial_model.sav")
+        # cv = load_file("data/countvectorizer.sav")
 
         video_id = get_video_id(url)
-        youtube = build_yt_api()
         comments = get_comments(youtube, video_id, 175)
 
+        print("Comments from ", url, " loaded !")
         try:
             comments, pos_emotions, negative_emotions = get_emotions(cv, model, comments)
             print(pos_emotions, negative_emotions)
